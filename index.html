@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./index.css" />
+    <title>Namaste React</title>
+  </head>
+  <body>
+    <div id="header">
+      <h1>Above React code</h1>
+    </div>
+    <!-- React will replace whatever is under root element. -->
+    <div id="root">
+      <h1>Hello Akshay Saini!</h1>
+    </div>
+
+    <h1>Below React code</h1>
+
+    <!-- <h1>Hello World!</h1>
+      <script>
+        const heading = document.createElement("h1");
+        heading.innerHTML = "Hello world from javaScript";
+        const root = document.getElementById("root");
+        root.appendChild(heading);
+      </script> -->
+
+    <!-- Injecting React  -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+
+    <!-- Hello World from React  -->
+    <!-- order of this matters links should be before this line. -->
+    <script src="./App.js"></script>
+  </body>
+</html>
