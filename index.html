@@ -10,9 +10,9 @@
     <div id="header">
       <h1>Above React code</h1>
     </div>
-    <!-- React will replace whatever is under root element. -->
+    <!-- React will replace whatever is under root element. If root does not work properly Not rendered will be displayed-->
     <div id="root">
-      <h1>Hello Akshay Saini!</h1>
+      <h1>Not rendered</h1>
     </div>
 
     <h1>Below React code</h1>
@@ -26,17 +26,17 @@
       </script> -->
 
     <!-- Injecting React  -->
-    <script
+    <!-- <script
       crossorigin
       src="https://unpkg.com/react@18/umd/react.development.js"
     ></script>
     <script
       crossorigin
       src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
-    ></script>
+    ></script> -->
 
     <!-- Hello World from React  -->
     <!-- order of this matters links should be before this line. -->
-    <script src="./App.js"></script>
+    <script type= "module" src="./App.js"></script>
   </body>
 </html>

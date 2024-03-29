@@ -1,31 +1,79 @@
-// <div id="parent">
-//   <div id="child">
-//     <h1>I am h1 tag.</h1>
-//     <h2>I am h1 tag.</h2>
-//   </div>
-// </div>
+import React from "react";
+import ReactDOM from "react-dom/client";
 
-// const heading = React.createElement(
-//   "h1",
-//   {
-//     id: "heading",
-//   },
-//   "Hello World from React!"
-// );
+/* 
+  React.createElement  => ReactElement( JS object) => When rendered on DOM becomes HTML(Browser Understands)
+  Not developer friendly -> JSX came into picture
+  JSX(created by Facebook devs) - not HTML in JS it is HTML like syntax, more like xml
 
-// ReactElement(object) => HTML(Browser Understands)
+  JS engine understands ECMAScript. ES 
+  Parcel transpiles JSX code for browser to understand.
+  JSX(transpiled by PARCEL before reaching browser) - PARCEL -> Babel
+  PARCEL uses Babel to transpile the JSX code for React to understand.
 
-const parent = React.createElement("div", { id: "parent" }, [
-  React.createElement("div", { id: "child1" }, [
-    React.createElement("h1", {}, "I am an h1 tag"),
-    React.createElement("h2", {}, "I am an h2 tag"),
-  ]),
-  React.createElement("div", { id: "child2" }, [
-    React.createElement("h1", {}, "I am an h1 tag"),
-    React.createElement("h2", {}, "I am an h2 tag"),
-  ]),
-]);
-console.log(parent); // An object
+  Equivalent to using React.createElement
+  JSX => React.createElement => ReactElement- JS object => HTMLElement(render)
+
+  https://babeljs.io/docs/
+
+  JSX version of below const heading.
+  const jsxHeading = <h1 id="heading" className="head" tabindex="1">React using JSX</h1>;
+  */
+const heading = React.createElement("h1", {id: "heading"}, "Namaste react");
+
+/* 
+  React component
+  Two types of component
+  i)  Class Based component - OLD
+  ii) Functional components - NEW
+
+  React functional component:- 
+    - a javascript function that returns JSX code/React element.
+
+    A function returning true.
+
+    const fn = () => true; same as 
+    const fn2 = () => { return true };
+
+    JSX takes care of injection attack.
+
+    {} - sanitizes data passed into jsx
+
+    Code is fast because of JSX.
+ */
+
+const elem = <span>A React element example</span>
+
+const TitleElement = (<h1 className="heading" tabIndex="5">{elem} and another React Element.</h1>);
+
+const Title = () =>{
+  return <h1 className="heading" tabIndex="5">Namaste React functional component.</h1>
+}
+// Put React element inside component//Component Composition - A component inside other component
+
+const HeadingComponent = () =>( 
+    <div id="container">
+      {TitleElement}
+      {/* Below 3 are same */}
+      {Title()}
+      <Title/>
+      <Title></Title>
+      <h1 className="heading" tabIndex="5">Inside React functional component.</h1>
+    </div>
+  )
+
+
+
+//root is root for React app
 const root = ReactDOM.createRoot(document.getElementById("root"));
-// Render method is responsible to convert this React element in heading tag and put it upon the DOM
-root.render(parent);
+
+// Appraoch 1
+// root.render(heading);
+
+// Appraoch 2
+// root.render(jsxHeading);
+
+// Appraoch 3
+root.render(<HeadingComponent/>);
+
+
