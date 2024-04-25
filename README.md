@@ -29,3 +29,19 @@
 - PARCEL uses Babel to transpile the JSX code for React to understand.
 - https://babeljs.io/docs/
 
+
+ #----------------------------Site design------------------------------------
+  * Header
+  *  - Logo
+  *  - Nav Items
+  * Body
+  *  - Search
+  *  - RestaurantContainer
+  *     -Restaurant Card 
+  *       -Image
+  *       -Name of Res, Star Rating, Cuisine, delery tie
+  * Footer
+  *  - Copyright
+  *  - Links
+  *  - Contact 
+  
