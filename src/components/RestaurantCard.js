@@ -1,3 +1,5 @@
+import { IMG_CDN_URL } from "../utils/constants";
+ 
  // RestaurantList is JSON Data for displaying cards
  const restaurantList = [
     {
@@ -1934,6 +1936,7 @@
     new: false,
   };
   
+
   
   
   //Inline Styling - Javascript object
@@ -1944,6 +1947,7 @@
    const RestaurantCard = (props) => {
     const { resData } = props;
     const {  
+      cloudinaryImageId,
       name,
       avgRating,
       cuisines,
@@ -1957,8 +1961,8 @@
     // resData.cloudinaryImageId
     return (
       <div className="res-card" style={styleCard}>
+        {/* <img src={IMG_CDN_URL + cloudinaryImageId} /> */}
         <img className="res-logo" alt="res-logo" src="https://img.freepik.com/premium-photo/idli-vada-with-sambar-pr-sambhar-also-called-medu-wada-rice-cake_466689-78746.jpg?w=360"/>
-        {/* <img className="res-logo" alt="res-logo" src={"https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/" + cloudinaryImageId}/> */}
         <h3>{name}</h3>
         <h4>{cuisines.join(", ")}</h4>
         <h4>{areaName}</h4>
