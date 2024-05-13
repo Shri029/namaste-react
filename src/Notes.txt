@@ -1,0 +1,67 @@
+Props- passing argument to a function.
+Props- a javascript object
+
+
+config driven ui- driven by data, controlling UI 
+
+using data, config(data is config)
+
+Why key used in map:-
+Components need to have unique id. Suppose a new resturant came in DOM need to insert a new resturant. Without ID React wudnt know which card is new, so all resturant would get re-rendered. With ID it excatly knows which need to be rerendered... So we need to identify all the new items..
+
+React says dont use index as keys. As index can change. Need to have a unique id.  
+
+-Two types of Export/Import
+
+-Export default component
+import component from "path";
+
+-Named Export/Import
+export const Component;
+import {Component} from "path";
+
+Hooks- javascript utility function given by React.
+useState()- Superpowerful , useEffect()
+
+Component re-renders when the state variable gets updated.
+
+Reconciliation algo-
+React fiber
+On UI-> 
+
+Suppose 7 cards on UI(Virtual DOM(a large object)- Representation of actual DOM)-> Filter applied and 3 cards left->
+
+Diff algo(React16)- finds the diff betn two DOMs (virtual & actual)
+React fiber - ongoing implementation
+Incremental rendering
+
+
+Monolith- huge big project, Apis, UI, DB, all in the same project
+
+Microservices- differents ervice for different purpose
+Diff services for diff purpose, seperation of responsibility
+SRP- single responsibility principle
+
+Bosy gets rendered and then useEffect gets called
+
+Shimmer UI- showing fake page untill real page is revealed.
+
+Whenever state variable updates, React triggers  a reconciliation cycle.
+
+React is fast bcz of Reconciliation process, React fiber.
+
+useEffect called everytime the component is rendered without depedency array. If something is provided in the array then once the value of array changes it render happens
+
+createBrowserRouter is recommended.
+
+Don't use href tag in React as navigation causes re-loading.
+
+Link- Under React-Router-DOM. Prevents multiple page refreshes.
+
+Browser is not re-loaded. Single page application
+
+  #-------------------Routing-----------------------
+  1) Client side routing- All the components are already loaded the app and we are not making any network call.
+  2) Server side routing- When the network call is coming from server is server side routing.
+
+  

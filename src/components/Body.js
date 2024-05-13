@@ -2,12 +2,19 @@ import RestaurantCard from "./RestaurantCard";
 // import { restaurantList } from "../utils/mockData";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 //  Not using keys (not acceptable) <<<<< Index as keys <<<<<<<<<< Unique ID(best practise)
 const Body = () =>{
     const [listOfResturants, setListOfResturants] = useState([]);
     const [filteredResturants, setFilteredResturants] = useState([]);
     const [searchText, setSearchText]= useState("");
+
+    //no depedency array-> useEffect gets called on every render.
+    //if emoty array is passed = [], => called on initial render(just once).
+    //if value is passed in the array= [val] => called whenever value of val gets updated.
+
+
 
     useEffect(()=>{
         fetchData();
@@ -16,6 +23,8 @@ const Body = () =>{
     const fetchData = async () => {
         const data = await fetch("https://foodfire.onrender.com/api/restaurants?lat=21.1702401&lng=72.83106070000001&page_type=DESKTOP_WEB_LISTING");
         const json = await data.json();
+
+        console.log("Data", json);
 
               // initialize checkJsonData() function to check Swiggy Restaurant data
       async function checkJsonData(jsonData) {
@@ -61,7 +70,7 @@ const Body = () =>{
         <div className="res-container">
         {listOfResturants.length>0 ? 
           filteredResturants.map((restaurant)=>
-            (<RestaurantCard key={restaurant?.info?.id} resData={restaurant?.info}/>)) 
+            (<Link key={restaurant?.info?.id} to={'/restaurants/'+restaurant?.info?.id}><RestaurantCard resData={restaurant?.info}/></Link>)) 
           : <Shimmer/>}{console.log(filteredResturants)}
         </div>
 
