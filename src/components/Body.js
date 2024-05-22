@@ -3,19 +3,25 @@ import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 //  Not using keys (not acceptable) <<<<< Index as keys <<<<<<<<<< Unique ID(best practise)
 const Body = () =>{
     const [listOfResturants, setListOfResturants] = useState([]);
     const [filteredResturants, setFilteredResturants] = useState([]);
     const [searchText, setSearchText]= useState("");
+    const onlineStatus = useOnlineStatus();
+
+    console.log("status", onlineStatus);
+
+    if(onlineStatus === false) 
+      return (
+        <h1>Seems line you are offline. Check internet connection.</h1>
+      );
 
     //no depedency array-> useEffect gets called on every render.
     //if emoty array is passed = [], => called on initial render(just once).
     //if value is passed in the array= [val] => called whenever value of val gets updated.
-
-
-
     useEffect(()=>{
         fetchData();
     },[])

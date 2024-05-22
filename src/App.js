@@ -1,4 +1,4 @@
-import React from "react";
+import React, {lazy, Suspense} from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -7,6 +7,11 @@ import About from "./components/About";
 import Contact from "./Contacts";
 import Error from "./Error";
 import RestaurantMenu from "./RestaurantMenu";
+// import Grocery from "./components/Grocery";
+
+
+//Instead of importing directly we are importing Grocery using lazy function
+const Grocery = lazy(() => import("./components/Grocery"))
 
  const AppLayout = () =>{
   return (
@@ -35,6 +40,10 @@ import RestaurantMenu from "./RestaurantMenu";
       {
         path: "/contact",
         element: <Contact/>,
+      },
+      {
+        path: "/grocery",
+        element: <Suspense fallback={<h1>Loading....</h1>}><Grocery/></Suspense>,
       },
       {
         path: "/error",
