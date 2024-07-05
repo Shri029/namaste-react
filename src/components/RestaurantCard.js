@@ -1960,10 +1960,10 @@ import { IMG_CDN_URL } from "../utils/constants";
     // "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/" +
     // resData.cloudinaryImageId
     return (
-      <div className="res-card" style={styleCard}>
+      <div className="m-4 p-4 w-[250px] rounded-lg bg-gray-50 hover:bg-gray-100" style={styleCard}>
         {/* <img src={IMG_CDN_URL + cloudinaryImageId} /> */}
-        <img className="res-logo" alt="res-logo" src="https://img.freepik.com/premium-photo/idli-vada-with-sambar-pr-sambhar-also-called-medu-wada-rice-cake_466689-78746.jpg?w=360"/>
-        <h3>{name}</h3>
+        <img className="rounded-lg" alt="res-logo" src="https://img.freepik.com/premium-photo/idli-vada-with-sambar-pr-sambhar-also-called-medu-wada-rice-cake_466689-78746.jpg?w=360"/>
+        <h3 className="font-bold py-4 text-lg">{name}</h3>
         <h4>{cuisines.join(", ")}</h4>
         <h4>{areaName}</h4>
         <h4>{avgRating}</h4>
