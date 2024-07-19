@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import RestaurantCategory from "./components/RestaurantCategory";
 import {
     swiggy_menu_api_URL,
     IMG_CDN_URL,
@@ -13,20 +14,25 @@ import {useRestaurantMenu} from "./utils/useRestaurantMenu";
 const RestaurantMenu = () => {
    const { resId } = useParams(); // call useParams and get value of restaurant id using object destructuring
    const {resInfo, restaurant, menuItems} = useRestaurantMenu(resId);
+   const [showIndex, setShowIndex] = useState(0);
+
+   const dummy = "Dummu Data";
     
+   console.log("data: ",restaurant, resInfo);
     return !restaurant ? (
       <div><p>Empty</p><Shimmer /></div>
     ) : (
-      <div className="restaurant-menu">
-        <div className="restaurant-summary">
-          <img
+      <div className="text-center">
+        <div className="font-bold my-6 text-2xl">
+          {/* <img
             className="restaurant-img"
             src={IMG_CDN_URL + restaurant?.cloudinaryImageId}
             alt={restaurant?.name}
-          />
+          /> */}
           <div className="restaurant-summary-details">
-            <h2 className="restaurant-title">{restaurant?.name}</h2>
-            <p className="restaurant-tags">{restaurant?.cuisines?.join(", ")}</p>
+            <h2 className="font-bold my-6 text-2xl">{restaurant?.name}</h2>
+            <div>{restaurant?.costForTwoMessage}</div>
+            {/* <p className="font-bold text-lg">{restaurant?.cuisines?.join(", ")}</p>
             <div className="restaurant-details">
               <div className="restaurant-rating" style={
               (restaurant?.avgRating) < 4
@@ -41,13 +47,17 @@ const RestaurantMenu = () => {
               <div className="restaurant-rating-slash">|</div>
               <div>{restaurant?.sla?.slaString}</div>
               <div className="restaurant-rating-slash">|</div>
-              <div>{restaurant?.costForTwoMessage}</div>
-            </div>
+            </div> */}
           </div>
         </div>
   
         <div className="restaurant-menu-content">
-          <div className="menu-items-container">
+          {
+            menuItems.map((item, index) =>
+              (<RestaurantCategory key={item.id} data={item} showItems={index === showIndex? true:false} setShowIndex={() => setShowIndex(index)}/>)
+            )
+          }
+          {/* <div className="menu-items-container">
             <div className="menu-title-wrap">
               <h3 className="menu-title">Recommended</h3>
               <p className="menu-count">
@@ -82,7 +92,7 @@ const RestaurantMenu = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     );

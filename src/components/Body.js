@@ -1,9 +1,11 @@
 import RestaurantCard from "./RestaurantCard";
 // import { restaurantList } from "../utils/mockData";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import RestaurantCard, { withVegLabel } from "./RestaurantCard";
+import UserContext from "../utils/userContext";
 
 //  Not using keys (not acceptable) <<<<< Index as keys <<<<<<<<<< Unique ID(best practise)
 const Body = () =>{
@@ -12,7 +14,11 @@ const Body = () =>{
     const [searchText, setSearchText]= useState("");
     const onlineStatus = useOnlineStatus();
 
-    console.log("status", onlineStatus);
+    const { setUserName } = useContext(UserContext);
+    const { loggedInUser } = useContext(UserContext);
+
+    //With restaurant card level inside a Restaurant card
+    const RestaurantCardVeg = withVegLabel(RestaurantCard);
 
     if(onlineStatus === false) 
       return (
@@ -30,9 +36,7 @@ const Body = () =>{
         const data = await fetch("https://foodfire.onrender.com/api/restaurants?lat=21.1702401&lng=72.83106070000001&page_type=DESKTOP_WEB_LISTING");
         const json = await data.json();
 
-        console.log("Data", json);
-
-              // initialize checkJsonData() function to check Swiggy Restaurant data
+        // initialize checkJsonData() function to check Swiggy Restaurant data
       async function checkJsonData(jsonData) {
         for (let i = 0; i < jsonData?.data?.cards.length; i++) {
 
@@ -61,7 +65,6 @@ const Body = () =>{
                 className="px-4 py-2 m-4 bg-green-100 rounded-lg"
                 onClick={()=>{
                     const filteredResturants = listOfResturants.filter((res) => res.info?.name.toLowerCase().includes(searchText.toLowerCase()));
-                    console.log("*******************************************Filter",filteredResturants);
                     setFilteredResturants(filteredResturants);
                 }}>Search</button>
             </div>
@@ -76,11 +79,23 @@ const Body = () =>{
                 }}>Top Rated Resturants
             </button>
             </div>
+            <div className="m-4 p-4 flex items-center">
+              <label>Username: </label>
+              <input className="border border-black p-2" value={loggedInUser} onChange={(e)=>{setUserName(e.target.value)}}></input>
+            </div>
         </div>
         <div className="flex flex-wrap">
         {listOfResturants.length>0 ? 
           filteredResturants.map((restaurant)=>
-            (<Link key={restaurant?.info?.id} to={'/restaurants/'+restaurant?.info?.id}><RestaurantCard resData={restaurant?.info}/></Link>)) 
+            (
+            <Link 
+                key={restaurant?.info?.id} 
+                to={'/restaurants/'+restaurant?.info?.id}
+            >{console.log("veg: ",restaurant?.info?.veg)}
+              {
+                 restaurant?.info?.veg !== undefined? <RestaurantCardVeg resData={restaurant?.info}/> : <RestaurantCard resData={restaurant?.info}/>
+              }
+              </Link>)) 
           : <Shimmer/>}{console.log(filteredResturants)}
         </div>
 

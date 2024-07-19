@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { IMG_CDN_URL } from "../utils/constants";
+import UserContext from "../utils/userContext";
  
  // RestaurantList is JSON Data for displaying cards
  const restaurantList = [
@@ -1935,10 +1937,7 @@ import { IMG_CDN_URL } from "../utils/constants";
     totalRatings: 100,
     new: false,
   };
-  
-
-  
-  
+    
   //Inline Styling - Javascript object
   const styleCard = {
     backgroundColor : "#f0f0f0",
@@ -1946,30 +1945,47 @@ import { IMG_CDN_URL } from "../utils/constants";
   
    const RestaurantCard = (props) => {
     const { resData } = props;
+
+    const { loggedInUser} = useContext(UserContext);
     const {  
       cloudinaryImageId,
       name,
       avgRating,
       cuisines,
       areaName,
-      sla,
       costForTwo,
       } = resData;
-    // console.log(props);
-    console.log(resData)
+
+    // console.log(resData)
     // "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/" +
     // resData.cloudinaryImageId
     return (
-      <div className="m-4 p-4 w-[250px] rounded-lg bg-gray-50 hover:bg-gray-100" style={styleCard}>
+      <div className="m-4 p-4 w-[250px] rounded-lg bg-gray-50 hover:bg-gray-100 min-h-300" style={styleCard}>
         {/* <img src={IMG_CDN_URL + cloudinaryImageId} /> */}
-        <img className="rounded-lg" alt="res-logo" src="https://img.freepik.com/premium-photo/idli-vada-with-sambar-pr-sambhar-also-called-medu-wada-rice-cake_466689-78746.jpg?w=360"/>
+        <img className="rounded-lg h-50" alt="res-logo" src="https://img.freepik.com/premium-photo/idli-vada-with-sambar-pr-sambhar-also-called-medu-wada-rice-cake_466689-78746.jpg?w=360"/>
         <h3 className="font-bold py-4 text-lg">{name}</h3>
         <h4>{cuisines.join(", ")}</h4>
         <h4>{areaName}</h4>
         <h4>{avgRating}</h4>
         <h4>₹{costForTwo / 100} FOR TWO</h4>
+        <h4>User: {loggedInUser} </h4>
       </div>
     )
    }
+
+   //Higher order component
+   //input - Restaurant => RestaurantCardPromoted
+
+   export const withVegLabel = (RestaurantCard) =>{
+      return (props) =>{
+        return(
+          <div>
+            <label className="absolute bg-green-500 text-white m-4
+             p-2 rounded-lg">Veg Food</label>
+            <RestaurantCard {...props}/>
+          </div>
+        );
+      };
+   };
 
    export default RestaurantCard;
