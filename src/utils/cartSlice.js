@@ -19,7 +19,7 @@ const cartSlice = createSlice({
             console.log(current(state))
             state.items.length = 0;
 
-            // similar to retun return [];
+            // similar to retun return {items : []} => originalState = [];
         }
     }
 });
