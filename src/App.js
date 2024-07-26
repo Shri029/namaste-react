@@ -7,7 +7,10 @@ import About from "./components/About";
 import Contact from "./Contacts";
 import Error from "./Error";
 import RestaurantMenu from "./RestaurantMenu";
+import Cart from "./components/Cart";
 import UserContext from "./utils/userContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
 // import Grocery from "./components/Grocery";
 
 
@@ -25,6 +28,7 @@ const Grocery = lazy(() => import("./components/Grocery"))
     setUserName(data.name);
   }, [])
   return (
+    <Provider store={appStore}>
     <UserContext.Provider value={{loggedInUser: userName, setUserName}}>
     <div className="app">
     {/* Shivani Tiwary on Header component. */}
@@ -35,6 +39,7 @@ const Grocery = lazy(() => import("./components/Grocery"))
       <Outlet/>
     </div>
     </UserContext.Provider>
+    </Provider>
   )
  }
 
@@ -67,6 +72,10 @@ const Grocery = lazy(() => import("./components/Grocery"))
       {
         path: "/restaurants/:resId",
         element: <RestaurantMenu/>,
+      },
+      {
+        path: "/cart",
+        element: <Cart/>,
       },
     ]
   },

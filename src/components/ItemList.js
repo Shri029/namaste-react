@@ -1,6 +1,14 @@
 import { IMG_CDN_URL } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import {addItem} from "../utils/cartSlice";
 
 const ItemList = ({items}) =>{
+    const dispatch = useDispatch();
+    const handleAddItem = (item) => {
+        console.log("Adding item", item);
+        //Dispatch an action
+        dispatch(addItem(item));
+    }
     console.log(items);
     return <div className="text-left selection:p-2 m-2 border border-gray-100 border-b-2 justify-between flex">
                 <div className="w-9/12">
@@ -12,7 +20,7 @@ const ItemList = ({items}) =>{
             </div>
             <div className="w-3/12 p-4">
                 <div className="absolute">
-                    <button className="p-2 mx-16 rounded-lg bg-black text-white shadow-lg absolute m-auto min-w-max">Add +</button>
+                    <button onClick={() => handleAddItem(items)} className="p-2 mx-16 rounded-lg bg-black text-white shadow-lg absolute m-auto min-w-max">Add +</button>
                 </div>
                 <img className="w-full h-40" src="https://img.freepik.com/premium-photo/idli-vada-with-sambar-pr-sambhar-also-called-medu-wada-rice-cake_466689-78746.jpg?w=360"/>
             </div>
